@@ -1,6 +1,23 @@
 <!doctype html>
 <html lang="ru" id="htmlRoot">
   <head>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1056897837330938');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1056897837330938&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="pageTitle">STATUS — Закрытая профессиональная сеть</title>
@@ -2984,7 +3001,6 @@
               class="pain-card-video-bg"
               src="video-horizontal.mp4"
               data-src-uk="UAvideo-horizontal.mp4"
-              data-src-en="ENvideo-horizontal.mp4"
               muted
               loop
               autoplay
@@ -2997,7 +3013,6 @@
               class="pain-card-video-el"
               src="video-horizontal.mp4"
               data-src-uk="UAvideo-horizontal.mp4"
-              data-src-en="ENvideo-horizontal.mp4"
               preload="metadata"
               controls
               playsinline
@@ -3037,7 +3052,6 @@
           id="popupVideo"
           src="video-horizontal.mp4"
           data-src-uk="UAvideo-horizontal.mp4"
-              data-src-en="ENvideo-horizontal.mp4"
           controls
           playsinline
         ></video>
@@ -3533,7 +3547,7 @@
           setTimeout(settle, HARD_TIMEOUT_MS);
         }
 
-        // Локализованное видео: uk -> data-src-uk, en -> data-src-en, ru -> исходный src
+        // Локализованное видео: uk -> data-src-uk, ru/en -> исходный src
         window.setLocalizedVideos = function (lang) {
           var vids = document.querySelectorAll("video[data-src-uk]");
           for (var i = 0; i < vids.length; i++) {
@@ -3544,9 +3558,7 @@
             var target =
               lang === "uk"
                 ? v.getAttribute("data-src-uk")
-                : lang === "en" && v.hasAttribute("data-src-en")
-                  ? v.getAttribute("data-src-en")
-                  : v.getAttribute("data-src-default");
+                : v.getAttribute("data-src-default");
             if (v.getAttribute("src") !== target) {
               v.setAttribute("src", target);
               try {
