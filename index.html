@@ -3001,6 +3001,7 @@
               class="pain-card-video-bg"
               src="video-horizontal.mp4"
               data-src-uk="UAvideo-horizontal.mp4"
+              data-src-en="ENvideo-horizontal.mp4"
               muted
               loop
               autoplay
@@ -3013,6 +3014,7 @@
               class="pain-card-video-el"
               src="video-horizontal.mp4"
               data-src-uk="UAvideo-horizontal.mp4"
+              data-src-en="ENvideo-horizontal.mp4"
               preload="metadata"
               controls
               playsinline
@@ -3052,6 +3054,7 @@
           id="popupVideo"
           src="video-horizontal.mp4"
           data-src-uk="UAvideo-horizontal.mp4"
+          data-src-en="ENvideo-horizontal.mp4"
           controls
           playsinline
         ></video>
@@ -3547,18 +3550,19 @@
           setTimeout(settle, HARD_TIMEOUT_MS);
         }
 
-        // Локализованное видео: uk -> data-src-uk, ru/en -> исходный src
+        // Локализованное видео: uk -> data-src-uk, en -> data-src-en, ru -> исходный src
         window.setLocalizedVideos = function (lang) {
-          var vids = document.querySelectorAll("video[data-src-uk]");
+          var vids = document.querySelectorAll(
+            "video[data-src-uk], video[data-src-en]"
+          );
           for (var i = 0; i < vids.length; i++) {
             var v = vids[i];
             if (!v.hasAttribute("data-src-default")) {
               v.setAttribute("data-src-default", v.getAttribute("src"));
             }
             var target =
-              lang === "uk"
-                ? v.getAttribute("data-src-uk")
-                : v.getAttribute("data-src-default");
+              v.getAttribute("data-src-" + lang) ||
+              v.getAttribute("data-src-default");
             if (v.getAttribute("src") !== target) {
               v.setAttribute("src", target);
               try {
